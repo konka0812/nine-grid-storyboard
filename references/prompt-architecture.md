@@ -9,7 +9,7 @@
 写清版式契约：
 
 ```text
-A 3x3 storyboard keyframe sheet for one continuous [3-12] second clip.
+A 3x3 storyboard keyframe sheet for one continuous [3-15] second clip.
 Read order: left-to-right, top-to-bottom.
 Nine panels with clear borders and clean gutters.
 ```

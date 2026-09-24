@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate a 3-12 second nine-grid storyboard markdown file."""
+"""Validate a 3-15 second nine-grid storyboard markdown file."""
 
 from __future__ import annotations
 
@@ -50,7 +50,7 @@ def main() -> int:
     parser.add_argument("--min-shots", type=int, default=9)
     parser.add_argument("--max-shots", type=int, default=9)
     parser.add_argument("--min-duration", type=float, default=3.0)
-    parser.add_argument("--max-duration", type=float, default=12.0)
+    parser.add_argument("--max-duration", type=float, default=15.0)
     args = parser.parse_args()
 
     text = args.markdown.read_text(encoding="utf-8")

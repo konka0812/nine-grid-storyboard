@@ -1,6 +1,6 @@
 ---
 name: nine-grid-storyboard
-description: Turn a reference image, script excerpt, or story beat into a production-ready 3x3 storyboard keyframe sheet and complete image-to-video prompt for one 3-12 second clip. For longer or more complex requests, create an approved multi-sequence split with one 3x3 sheet and prompt per sequence. Supports product demos, short drama, comic drama, object animation, and lifestyle clips; does not generate media or call providers.
+description: Turn a reference image, script excerpt, or story beat into a production-ready 3x3 storyboard keyframe sheet and complete image-to-video prompt for one 3-15 second clip. For longer or more complex requests, create an approved multi-sequence split with one 3x3 sheet and prompt per sequence. Supports product demos, short drama, comic drama, object animation, and lifestyle clips; does not generate media or call providers.
 license: MIT
 ---
 
@@ -12,10 +12,10 @@ license: MIT
 
 ```text
 一个片段 = 一张 3×3 分镜关键帧图 + 一条完整视频提示词
-片段时长 = 3-12 秒
+片段时长 = 3-15 秒
 ```
 
-3×3 分镜图里的九个格子，就是这个片段的九个分镜关键帧。它们共同服务同一个 3-12 秒片段，不是九条独立视频，也不是三张独立关键帧。
+3×3 分镜图里的九个格子，就是这个片段的九个分镜关键帧。它们共同服务同一个 3-15 秒片段，不是九条独立视频，也不是三张独立关键帧。
 
 默认提交方式：
 
@@ -45,7 +45,7 @@ license: MIT
 
 满足全部条件时只做一个 3×3 分镜图：
 
-1. 目标片段在 `3-12 秒`。
+1. 目标片段在 `3-15 秒`。
 2. 一个主要空间或连续空间。
 3. 主体状态变化可以由九格清楚承载。
 4. 没有必要的时间跳跃、大范围转场或复杂多线动作。
@@ -56,7 +56,7 @@ license: MIT
 
 出现任一情况时，不要直接生成一个九宫格：
 
-1. 用户要求超过 `12 秒`。
+1. 用户要求超过 `15 秒`。
 2. 动作链过长，九格无法清晰承载。
 3. 有多个强转折、多地点、明显时间跳跃。
 4. 产品开合/装配/使用流程太复杂。
@@ -74,7 +74,7 @@ license: MIT
 - 分段数：
 
 ## SEQ-01
-- 时长：3-12s
+- 时长：3-15s
 - 目标：
 - Carry-in：
 - 九格职责：
@@ -101,7 +101,7 @@ license: MIT
 
 | 输入 | 用途 |
 | --- | --- |
-| 时长 | 必须落到 `3-12s`；超过时先拆分。 |
+| 时长 | 必须落到 `3-15s`；超过时先拆分。 |
 | 画幅 | 默认 `16:9`；抖音竖屏可用 `9:16`。 |
 | 模式 | 产品 / 短剧 / 漫剧 / 生活方式。未说明时根据素材推断。 |
 | 卖点/情绪 | 决定九格节奏。 |
@@ -142,7 +142,7 @@ license: MIT
 
 - 模式：product / narrative / comic / lifestyle
 - 片段意图：
-- 时长：3-12s
+- 时长：3-15s
 - 画幅：
 - 风格：
 - 必须出现：
@@ -210,7 +210,7 @@ Sheet Contract → Subject / Story Bible → Nine-Panel Sequence → Style Bible
 
 1. 这是一张 3×3 storyboard keyframe sheet。
 2. 九格按左到右、上到下阅读。
-3. 九格共同覆盖同一个 3-12 秒片段。
+3. 九格共同覆盖同一个 3-15 秒片段。
 4. 每格之间有清晰边框和留白。
 5. 九格共享同一主体身份、材质、色彩、光线和空间逻辑。
 6. 短剧/漫剧角色不能换脸、换装、换体型。
@@ -225,7 +225,7 @@ Sheet Contract → Subject / Story Bible → Nine-Panel Sequence → Style Bible
 默认交付一条完整提示词，用于：
 
 ```text
-3×3 分镜图 + 完整视频提示词 → 一个 3-12s 视频
+3×3 分镜图 + 完整视频提示词 → 一个 3-15s 视频
 ```
 
 提示词必须写清：
@@ -253,11 +253,11 @@ Reference Roles → Style & Mood → Dynamic Description → Static Description 
 
 拆分方案、Carry 状态、转场类型和生成顺序按 [multi-sequence-continuity.md](references/multi-sequence-continuity.md) 执行。
 
-每个 `SEQ` 仍遵守 `3-12s` 规则：
+每个 `SEQ` 仍遵守 `3-15s` 规则：
 
 ```text
-SEQ-01：3-12s + SEQ-01 3×3 分镜图 + SEQ-01 完整视频提示词
-SEQ-02：3-12s + SEQ-02 3×3 分镜图 + SEQ-02 完整视频提示词
+SEQ-01：3-15s + SEQ-01 3×3 分镜图 + SEQ-01 完整视频提示词
+SEQ-02：3-15s + SEQ-02 3×3 分镜图 + SEQ-02 完整视频提示词
 ...
 ```
 
@@ -278,7 +278,7 @@ SEQ-02：3-12s + SEQ-02 3×3 分镜图 + SEQ-02 完整视频提示词
 - 禁止项：
 
 ## SEQ-01
-- 时长：3-12s
+- 时长：3-15s
 - Carry-in：角色站在门口，伞收在右手，地面湿。
 - 目标：看见熟悉的名字。
 - Carry-out：角色停在桌前，视线锁定信件。
@@ -352,7 +352,7 @@ nine_grid/
 
 交付前检查：
 
-1. 单个片段时长在 `3-12s`。
+1. 单个片段时长在 `3-15s`。
 2. 九格 ID 连续，无重复、无缺失。
 3. 九格共同覆盖完整片段，不缺开始、中间或结尾。
 4. 每格有独立职责，不只是“换个角度再看一遍”。

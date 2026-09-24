@@ -3,7 +3,7 @@
 默认提交方式：
 
 ```text
-3×3 分镜关键帧图 + 一条完整视频提示词 → 一个 3-12 秒视频
+3×3 分镜关键帧图 + 一条完整视频提示词 → 一个 3-15 秒视频
 ```
 
 不要默认把九宫格拆成三张关键帧、三条提示词、三段视频。
@@ -68,7 +68,7 @@ Use IMAGE 2 as GRID_SHOT_PLAN and storyboard keyframe sheet.
 IMAGE 1 defines the exact subject silhouette, proportions, materials, colors,
 component count, visible identity cues and, for characters, face shape, hairstyle
 and costume continuity.
-IMAGE 2 defines a 3-12 second shot plan with nine keyframes. It determines shot
+IMAGE 2 defines a 3-15 second shot plan with nine keyframes. It determines shot
 order, framing logic, information beats and rhythm.
 IMAGE 2 is not a physical storyboard, comic page or object in the scene.
 Do not render its borders, gutters, panel numbers, paper texture or layout.
@@ -81,13 +81,13 @@ proportions, but it never determines the opening composition, subject pose,
 camera angle or background.
 Do not open the video on IMAGE 1's framing.
 
-Target duration: [3-12] seconds.
+Target duration: [3-15] seconds.
 Aspect ratio: [16:9 / 9:16 / 1:1].
 Goal: [product demo / narrative beat / comic drama / lifestyle clip].
 
 Style & Mood: [PALETTE], [LIGHT DIRECTION], [MATERIAL RENDERING], [CAMERA CHARACTER].
 
-Dynamic Description: interpret the nine keyframes as one continuous 3-12 second clip.
+Dynamic Description: interpret the nine keyframes as one continuous 3-15 second clip.
 0.0-1.2s: [SHOT 01 start, one main change, end, camera].
 1.2-2.4s: [SHOT 02 start, one main change, end, camera].
 [Continue through SHOT 09 with the exact time ranges from storyboard_plan.md.]
@@ -112,7 +112,7 @@ It is a shot-planning sheet, not a physical storyboard, comic page or object.
 Do not render its borders, gutters, panel numbers, paper texture or layout.
 The video opens on Panel 1 (top-left keyframe) of this sheet.
 
-Target duration: [3-12] seconds.
+Target duration: [3-15] seconds.
 Aspect ratio: [16:9 / 9:16 / 1:1].
 Goal: [product demo / narrative beat / comic drama / lifestyle clip].
 
@@ -122,7 +122,7 @@ Static visual anchors:
 
 Style & Mood: [PALETTE], [LIGHT DIRECTION], [MATERIAL RENDERING], [CAMERA CHARACTER].
 
-Dynamic Description: interpret the nine keyframes as one continuous 3-12 second clip.
+Dynamic Description: interpret the nine keyframes as one continuous 3-15 second clip.
 0.0-1.2s: [SHOT 01 start, one main change, end, camera].
 [Continue through SHOT 09 with the exact time ranges from storyboard_plan.md.]
 
@@ -140,7 +140,7 @@ No storyboard borders, panel numbers, comic page, text or watermark.
 
 ```text
 Use IMAGE 1 as GRID_SHOT_PLAN and storyboard keyframe sheet for SEQ-[NN].
-It defines one continuous [3-12] second segment with nine keyframes.
+It defines one continuous [3-15] second segment with nine keyframes.
 It is not a physical storyboard, comic page or object.
 Do not render its borders, gutters, panel numbers, paper texture or layout.
 
@@ -150,7 +150,7 @@ Do not render its borders, gutters, panel numbers, paper texture or layout.
 [If SUBJECT_IDENTITY present, insert the full First-frame anchor block here.
 If only the grid, write: The video opens on Panel 1 of this sheet.]
 
-Target duration: [3-12] seconds.
+Target duration: [3-15] seconds.
 Aspect ratio: [16:9 / 9:16 / 1:1].
 Sequence: SEQ-[NN].
 Goal: [segment goal].

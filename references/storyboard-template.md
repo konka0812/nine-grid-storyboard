@@ -1,6 +1,6 @@
 # 3×3 Storyboard Keyframe Sheet Template
 
-用于产品、物件、短剧、漫剧、旅行和生活方式片段。模式不同，九格职责不同；版式和连续性要求相同。九格共同覆盖一个 `3-12s` 片段。
+用于产品、物件、短剧、漫剧、旅行和生活方式片段。模式不同，九格职责不同；版式和连续性要求相同。九格共同覆盖一个 `3-15s` 片段。
 
 ## 九格计划字段
 
@@ -22,7 +22,7 @@
 - 声音/台词：
 ```
 
-`动作` 只保留一个主要变化。若确实没有主体动作，写 `无主体动作；仅光影/氛围变化`。所有 `时间范围` 必须连续，且总时长等于 `3-12s`。
+`动作` 只保留一个主要变化。若确实没有主体动作，写 `无主体动作；仅光影/氛围变化`。所有 `时间范围` 必须连续，且总时长等于 `3-15s`。
 
 `来源/覆盖` 写这一格承担了哪个用户要求、剧本文本、卖点或声音；没有来源的装饰格应删除。`声音/台词` 没有声音时写 `无`，不要留空。
 
@@ -71,7 +71,7 @@
 ## 3×3 图像提示词模板
 
 ```text
-A clean 3x3 storyboard keyframe sheet for one continuous [3-12] second
+A clean 3x3 storyboard keyframe sheet for one continuous [3-15] second
 [PRODUCT VIDEO / SHORT DRAMA / COMIC DRAMA / LIFESTYLE FILM].
 Read order: left-to-right, top-to-bottom.
 Nine separate panels with clear borders and clean gutters.

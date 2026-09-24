@@ -1,4 +1,4 @@
 interface:
   display_name: Nine-Grid Storyboard
   short_description: Turn a reference or story beat into a reviewable 3x3 shot plan.
-  default_prompt: Use nine-grid-storyboard to turn this reference and clip idea into a 3x3 storyboard keyframe sheet and one complete image-to-video prompt for a 3-12 second clip.
+  default_prompt: Use nine-grid-storyboard to turn this reference and clip idea into a 3x3 storyboard keyframe sheet and one complete image-to-video prompt for a 3-15 second clip.
