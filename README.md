@@ -12,10 +12,11 @@
 
 它不是把九宫格当漫画书让镜头扫过去，而是把九格当作视频模型的 **视觉 DNA、镜头顺序和节奏参考**。生成的视频应呈现真实场景或产品动画，而不是出现分镜边框、编号或纸纹。
 
-两个关键交付特性：
+三个关键交付特性：
 
 - **首帧锚定**：双图提交（身份图 + 九宫格）时，视频提示词强制声明**视频第一帧对应九宫格第一格**，而不是身份参考图的构图——避免视频模型默认用原图开场。
-- **双语提示词**：视频提示词默认同时输出中文版和 English Version（对白文本两版都保持中文），可直接复制到不同偏好的模型。
+- **H3 三字段为默认**：视频提示词默认输出 `integrated_multimodal_description` / `overall_soundscape` / `non_diegetic_music` 结构；说话人稳定 ID + 声音画像，对白用 `<d>[Chinese]</d>` 逐字内联，支持跨切 `<scenetrans>`、截断 `<cutoff>`、画外音嘴唇闭合声明。
+- **中文通用版**：同时附一条纯中文时间线版，供不支持三字段结构的图生视频模型使用；对白两版都保持中文。
 
 ## 支持场景
 
@@ -189,6 +190,24 @@ Do not open the video on IMAGE 1's framing.
 ```
 
 九宫格第一格就是片段的开场镜头；身份图里的姿势、机位和背景只是身份快照，不是开场状态。
+
+### H3 三字段（默认视频提示词）
+
+`video_prompt.md` 的第一块默认是 H3 结构，第二块是中文通用版。带对白的片段在 H3 版里用稳定说话人 ID 和 `<d>` 标记：
+
+```text
+integrated_multimodal_description: [Shot 1] High-end 3D CG, cinematic, a static wide shot frames ...
+[Shot 2] At 00:01.200, the camera cuts to a side medium shot as the tired man with a low, hoarse,
+slightly urgent voice (S2) steps out from beside the parked car and calls out:
+<d>[Chinese] 晚晚。</d> ...
+
+overall_soundscape: Water drips from the eaves onto the wet pavement with distant late-night
+traffic hum. Her heels tap softly on the reflective ground ...
+
+non_diegetic_music: N/A
+```
+
+规则：说话人 ID 跨镜头不变；声音画像写在 `<d>` 外面；台词只放逐字原文；跨切加 `<scenetrans>`，被结尾截断加 `<cutoff>`；画外音必须声明画面人物嘴唇保持闭合。
 
 ## 校验
 

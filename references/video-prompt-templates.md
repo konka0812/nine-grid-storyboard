@@ -48,16 +48,63 @@ IMAGE 1 只做身份参考：它决定脸型、服装、材质和比例，
 
 只有九宫格单图时不需要此块（首帧天然对应第一格），但仍建议写一句 `The video opens on Panel 1 of IMAGE 1.`。
 
-## 双语交付
+## 交付结构（默认 H3 + 中文通用版）
 
-`video_prompt.md` 默认输出**中文版 + English version** 两个完整可复制代码块：
+`video_prompt.md` 默认输出两个完整可复制代码块，H3 版在前：
 
-1. 两版内容语义一致：同一条时间线、同一组静态锚点、同一套红线。
-2. 对白 / 台词文本两个版本都保持中文原文，不翻译。
-3. 两版都放在独立代码块中，标注 `## 中文版` 和 `## English Version`。
-4. 用户明确只要单语时，可只交付一版，但默认是双语。
+1. `## H3 版`：三字段结构（`integrated_multimodal_description` / `overall_soundscape` / `non_diegetic_music`），正文英文，对白用 `<d>[Chinese]</d>` 逐字内联。
+2. `## 中文通用版`：纯中文时间线提示词，供不支持三字段结构的图生视频模型使用。
+3. 两版共享同一组事实：时间码、对白逐字内容、静态锚点、红线。
+4. 对白 / 台词两版都保持中文原文，不翻译。
+5. 用户明确只要单版时，可只交付一版，但默认是 H3 + 中文通用。
 
-## 单九宫格 · 完整视频提示词
+## H3 三字段格式（默认）
+
+`video_prompt.md` 的第一块默认就是 H3 三字段格式，面向 MiniMax H3 及兼容该结构的模型；同一条时间线一次成稿，中文通用版只是同一事实的另一种包装。
+
+### 字段结构
+
+```text
+integrated_multimodal_description: [Shot 1] ... [Shot 2] At 00:03.500, ...
+
+overall_soundscape: ...
+
+non_diegetic_music: ... / N/A
+```
+
+1. `integrated_multimodal_description`：画面、动作、镜头、说话人、对白、戏内音，按时间线内联。
+2. `overall_soundscape`：环境音、动作音、非人声；1-4 句；不重复对白。
+3. `non_diegetic_music`：只给观众听的配乐；没有写 `N/A`。
+
+### 镜头与切换
+
+1. `[Shot 1]` 不写时间码，直接开始。
+2. 后续镜头写 `[Shot N] At mm:ss.mmm, the camera cuts to ...`；时间码严格递增且在总时长内。
+3. 普通剪辑只用标准短语（the camera cuts to / the shot switches to）；不默认叠化。
+4. 运镜写成"类型 + 幅度 + 速度"的自然语句，例如 `The camera pushes in with small amplitude at slow speed`。
+
+### 说话人与对白标记
+
+1. 每个发声角色一个稳定 ID（`S1`、`S2`…），跨镜头不变；不发声的角色不发 ID。
+2. 说话人首次出现时写声音画像：年龄感、性别、音高、音色、语速；画像、动作和语气写在 `<d>` 外面。
+3. 对白用 `<d>[语言] 台词</d>`：标签里只写语言（中文用 `[Chinese]`），标签后只放逐字原文；不翻译、不改标点。
+4. 台词横跨切点：两段连接处都加 `<scenetrans>`，并声明 `continues seamlessly across the cut`。
+5. 台词被视频结尾截断：加 `<cutoff>`。
+6. 画外音：用 `says in an off-screen voiceover`，`<d>` 之后立刻声明画面人物嘴唇保持闭合。
+
+### 与首帧锚定的关系
+
+若把九宫格首格图像单独导出并作为 H3 的 I2VA 首帧输入，第一行必须是：
+
+```text
+For the target video, at 0.00 seconds into the target video, <Picture 1> (from [Shot 1]) is fully referenced.
+```
+
+若只交付文字版三字段（T2VA），不需要该行；首格状态写进 `[Shot 1]` 开头。
+
+## 通用中文版 · 完整视频提示词（兼容导出）
+
+以下模板用于 `## 中文通用版` 代码块，或用户明确不要 H3 结构时的唯一交付。事实与 H3 版完全一致。
 
 ### 有原图 / 角色 / 场景参考
 
@@ -135,6 +182,8 @@ No storyboard borders, panel numbers, comic page, text or watermark.
 ## 多片段 · 每段一条完整提示词
 
 只有用户确认拆分后才使用。每个 `SEQ` 仍然是一条完整提示词，不是一个九格一条碎提示。
+
+每个 `SEQ` 同样默认输出 H3 三字段版；`[Shot 1]` 的 Carry-in 状态写进 `integrated_multimodal_description` 开头，`Carry-out` 写进最后一个镜头的终点描述。
 
 ### SEQ 提示词骨架
 

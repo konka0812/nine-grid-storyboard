@@ -97,13 +97,22 @@ Do not open the video on IMAGE 1's framing.
 
 中文版同步翻译此块。只有九宫格单图时写一句 `The video opens on Panel 1 of this sheet.` 即可。
 
-### 1.6 Bilingual Delivery
+### 1.6 Delivery Format（默认 H3 + 中文通用版）
 
-最终交付的视频提示词默认同时输出中文版和 English version：
+最终交付的视频提示词默认输出两个完整代码块，H3 版在前：
 
-1. 两版时间线、静态锚点、红线语义完全一致。
-2. 对白 / 台词在两个版本中都保持中文原文。
-3. 各自放在独立代码块，标注 `## 中文版` 和 `## English Version`。
+1. `## H3 版`：`integrated_multimodal_description` / `overall_soundscape` / `non_diegetic_music` 三字段，正文英文，镜头用 `[Shot N] At mm:ss.mmm`，运镜写“类型 + 幅度 + 速度”。
+2. `## 中文通用版`：纯中文时间线提示词，供不支持三字段的模型。
+3. 两版时间线、静态锚点、红线语义完全一致；对白两版都保持中文原文。
+
+### 1.7 Speaker & Dialogue Markup
+
+H3 版带对白时必须：
+
+1. 每个发声角色一个稳定 ID（`S1`、`S2`…），跨镜头不变；声音画像（年龄感、性别、音高、音色、语速）写在首次出现处、`<d>` 外面。
+2. 对白写 `<d>[Chinese] 台词</d>`：只放逐字原文，不翻译、不改标点。
+3. 台词跨切点：两段连接处加 `<scenetrans>` 并声明声音连续；被结尾截断加 `<cutoff>`。
+4. 画外音用 `says in an off-screen voiceover`，`<d>` 后立刻声明画面人物嘴唇保持闭合。
 
 ### 2. Style & Mood
 
