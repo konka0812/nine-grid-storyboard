@@ -81,6 +81,30 @@ Use IMAGE 2 as GRID_SHOT_PLAN.
 Use IMAGE 1 as GRID_SHOT_PLAN and subject identity.
 ```
 
+### 1.5 First-Frame Anchor（双图提交时必写）
+
+双图提交（身份图 + 九宫格）时，视频模型默认会把 IMAGE 1 的构图当视频开头。必须在 Reference Roles 之后立刻写首帧锚定，把开头权交给九宫格第一格：
+
+```text
+First-frame anchor:
+The first frame of this video must match Panel 1 (top-left keyframe) of IMAGE 2,
+including its composition, subject pose, camera angle and background.
+IMAGE 1 is an identity-only reference: it defines face, costume, materials and
+proportions, but it never determines the opening composition, subject pose,
+camera angle or background.
+Do not open the video on IMAGE 1's framing.
+```
+
+中文版同步翻译此块。只有九宫格单图时写一句 `The video opens on Panel 1 of this sheet.` 即可。
+
+### 1.6 Bilingual Delivery
+
+最终交付的视频提示词默认同时输出中文版和 English version：
+
+1. 两版时间线、静态锚点、红线语义完全一致。
+2. 对白 / 台词在两个版本中都保持中文原文。
+3. 各自放在独立代码块，标注 `## 中文版` 和 `## English Version`。
+
 ### 2. Style & Mood
 
 写调色板、光线、材质、镜头气质。不要堆 `cinematic`、`masterpiece` 这类空词。

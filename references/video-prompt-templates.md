@@ -12,12 +12,50 @@
 
 | 标签 | 输入 | 控制 | 不控制 |
 | --- | --- | --- | --- |
-| GRID_SHOT_PLAN | 3×3 分镜关键帧图 | 九格顺序、构图方向、景别变化、信息点、节奏 | 分镜边框、编号、纸纹、主体身份 |
-| SUBJECT_IDENTITY | 产品图、角色图、场景图、物件图 | 轮廓、比例、材质、颜色、部件数量、角色识别特征 | 镜头运动、节奏、尚未发生的动作 |
+| GRID_SHOT_PLAN | 3×3 分镜关键帧图 | 九格顺序、构图方向、景别变化、信息点、节奏、**首帧构图** | 分镜边框、编号、纸纹、主体身份 |
+| SUBJECT_IDENTITY | 产品图、角色图、场景图、物件图 | 轮廓、比例、材质、颜色、部件数量、角色识别特征 | 镜头运动、节奏、尚未发生的动作、**首帧构图** |
 | STYLE_LIGHT | 风格/灯光参考 | 光比、色温、景深、氛围 | 主体结构、剧情结果 |
 | CARRY_IN_ANCHOR | 上一段视频尾帧或终帧图 | 上一段结束状态 | 本段全部镜头设计 |
 
 如果没有原产品图、角色图或场景图，让九宫格同时承担身份锚点，并在提示词中写清静态视觉锚点。
+
+## 首帧锚定（必写）
+
+当提交 `原图（SUBJECT_IDENTITY）+ 九宫格（GRID_SHOT_PLAN）` 两张图给视频模型时，模型默认倾向用 IMAGE 1 的构图和状态作为视频开头。必须在提示词里显式声明：**视频首帧对应九宫格第一格（左上），不是身份参考图**。
+
+英文版锚定块（插入在 IMAGE 声明之后、Dynamic Description 之前）：
+
+```text
+First-frame anchor:
+The first frame of this video must match Panel 1 (top-left keyframe) of IMAGE 2,
+including its composition, subject pose, camera angle and background.
+IMAGE 1 is an identity-only reference: it defines face, costume, materials and
+proportions, but it never determines the opening composition, subject pose,
+camera angle or background.
+Do not open the video on IMAGE 1's framing.
+```
+
+中文版锚定块：
+
+```text
+首帧锚定：
+视频第一帧必须对应 IMAGE 2（九宫格分镜图）左上角的第一格，
+包括该格的构图、主体姿势、机位和背景。
+IMAGE 1 只做身份参考：它决定脸型、服装、材质和比例，
+但不决定开头构图、主体姿势、机位或背景。
+不要以 IMAGE 1 的构图作为视频开头。
+```
+
+只有九宫格单图时不需要此块（首帧天然对应第一格），但仍建议写一句 `The video opens on Panel 1 of IMAGE 1.`。
+
+## 双语交付
+
+`video_prompt.md` 默认输出**中文版 + English version** 两个完整可复制代码块：
+
+1. 两版内容语义一致：同一条时间线、同一组静态锚点、同一套红线。
+2. 对白 / 台词文本两个版本都保持中文原文，不翻译。
+3. 两版都放在独立代码块中，标注 `## 中文版` 和 `## English Version`。
+4. 用户明确只要单语时，可只交付一版，但默认是双语。
 
 ## 单九宫格 · 完整视频提示词
 
@@ -34,6 +72,14 @@ IMAGE 2 defines a 3-12 second shot plan with nine keyframes. It determines shot
 order, framing logic, information beats and rhythm.
 IMAGE 2 is not a physical storyboard, comic page or object in the scene.
 Do not render its borders, gutters, panel numbers, paper texture or layout.
+
+First-frame anchor:
+The first frame of this video must match Panel 1 (top-left keyframe) of IMAGE 2,
+including its composition, subject pose, camera angle and background.
+IMAGE 1 is an identity-only reference: it defines face, costume, materials and
+proportions, but it never determines the opening composition, subject pose,
+camera angle or background.
+Do not open the video on IMAGE 1's framing.
 
 Target duration: [3-12] seconds.
 Aspect ratio: [16:9 / 9:16 / 1:1].
@@ -64,6 +110,7 @@ It also defines the subject identity, wardrobe/material, environment, lighting,
 color palette and visible components for the whole clip.
 It is a shot-planning sheet, not a physical storyboard, comic page or object.
 Do not render its borders, gutters, panel numbers, paper texture or layout.
+The video opens on Panel 1 (top-left keyframe) of this sheet.
 
 Target duration: [3-12] seconds.
 Aspect ratio: [16:9 / 9:16 / 1:1].
@@ -99,6 +146,9 @@ Do not render its borders, gutters, panel numbers, paper texture or layout.
 
 [Optional: Use IMAGE 0 as SUBJECT_IDENTITY.]
 [Optional: Use previous final frame as CARRY_IN_ANCHOR.]
+
+[If SUBJECT_IDENTITY present, insert the full First-frame anchor block here.
+If only the grid, write: The video opens on Panel 1 of this sheet.]
 
 Target duration: [3-12] seconds.
 Aspect ratio: [16:9 / 9:16 / 1:1].
